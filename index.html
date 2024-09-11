@@ -5,19 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socket.IO Test</title>
-    <script type="module">
-        import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
-        const socket = io();
-        socket.on('welcome', (message) => {
-            console.log(message);
-            document.getElementById('message').innerText = message;
-        });
-    </script>
+
 </head>
 
 <body>
-    <h1>Socket.IO Test</h1>
-    <p id="message">Waiting for message...</p>
+
+    <body>
+        <h1>Socket.IO Test</h1>
+        <p id="message">Waiting for message...</p>
+
+        <input type="text" id="input"><br />
+        <button id="send">send</button>
+    </body>
 </body>
+<script type="module">
+    import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
+    const socket = io();
+    socket.on('welcome', (message) => {
+        console.log(message);
+        document.getElementById('message').innerText = message;
+    });
+    document.getElementById('send').addEventListener('click', () => {
+        socket.emit('welcome', document.getElementById('input').value || "new Value")
+    })
+</script>
 
 </html>

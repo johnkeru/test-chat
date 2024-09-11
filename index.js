@@ -19,7 +19,10 @@ io.on('connection', (socket) => {
     console.log('A user connected');
 
     // Test by emitting a message to the client
-    socket.emit('welcome', 'Hello from the server!');
+    socket.on('welcome', message => {
+        socket.emit('welcome', message);
+    })
+
 
     socket.on('disconnect', () => {
         console.log('A user disconnected');
